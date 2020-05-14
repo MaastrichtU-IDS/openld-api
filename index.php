@@ -1,8 +1,8 @@
 <?php
 $error  = '';
 
-$lserver = "http://localhost";
-$fserver = "http://localhost:8890/sparql"; // federate
+$lserver = "http://virtuoso";
+$fserver = "http://virtuoso:8890/sparql"; // federate
 $server_list = "servers.tab";
 $request = parseRequest();
 if(isset($request['args']['example'])) {
@@ -597,7 +597,7 @@ if($a[0] != '') {
 	}
 
 	$u = str_replace(array($proxy_id,$target_id),$remote_id, $uri);
-	$fserver = "http://localhost:14050"; // federate
+	$fserver = "http://virtuoso:8890"; // federate
 
 # $q .= "{SERVICE <$e> {?s ?p ?o FILTER(?s=<$u>) OPTIONAL{?o rdfs:label ?label}}} UNION ";
 # $q .= "{SERVICE <$e> {{?s ?p ?o FILTER(?s=<$u>) OPTIONAL{?o rdfs:label ?label}}UNION{?s ?p ?o FILTER(?o=<$u>)}}} UNION ";
@@ -766,7 +766,7 @@ function renderHTML($uri, $c, $args, $query_type = 'construct_describe')
 	$params = "?".getParams($myargs);
 
 	if(preg_match("/(html|nice-microdata)/",$format)) {
-		$c = str_replace("http://localhost:8890/describe/",$dataset."/describe",$c);
+		$c = str_replace("http://virtuoso:8890/describe/",$dataset."/describe",$c);
 		$c = str_replace($target_id,$proxy_id,$c);
 		$c = preg_replace("/href=\"http:([^\"]+)\">/","href=\"http:\${1}$params\">",$c);
 		echo $c;exit;
